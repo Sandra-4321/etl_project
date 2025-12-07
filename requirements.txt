@@ -1,0 +1,7 @@
+pdfplumber
+spacy
+sentence-transformers
+rapidfuzz
+loguru
+boto3
+watchtower
