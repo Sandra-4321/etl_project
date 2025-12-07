@@ -2,9 +2,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-# ================================================================
+
 # 1. ABLATION DATA (Regex vs Hybrid)
-# ================================================================
+
 data = {
     "Document": [
         "Cabinet Res 12 (2025)", "Cabinet Res 34 (2025)", "Cabinet Res 37 (2017)",
@@ -21,9 +21,9 @@ df["Additional"] = df["Hybrid"] - df["Regex_Only"]
 df["Improvement_%"] = ((df["Additional"] / df["Regex_Only"]) * 100).round(2)
 
 
-# ================================================================
+
 # 2. SUMMARY METRICS
-# ================================================================
+
 def generate_summary_metrics(df):
     total_regex = df["Regex_Only"].sum()
     total_hybrid = df["Hybrid"].sum()
@@ -39,9 +39,9 @@ def generate_summary_metrics(df):
     return total_regex, total_hybrid, additional, improvement
 
 
-# ================================================================
+
 # 3. SAVE ABLATION TABLE AS CSV + MARKDOWN
-# ================================================================
+
 def export_tables(df):
     df.to_csv("ablation_results.csv", index=False)
     print("\nCSV saved: ablation_results.csv\n")
@@ -52,12 +52,12 @@ def export_tables(df):
     print("Markdown saved: ablation_results.md\n")
 
 
-# ================================================================
+
 # 4. GRAPHS & VISUALIZATIONS
-# ================================================================
+
 def generate_graphs(df):
 
-    # ------------------ Bar Chart: Regex vs Hybrid ------------------
+    # Chart: Regex vs Hybrid
     plt.figure(figsize=(12, 6))
     x = np.arange(len(df["Document"]))
     width = 0.35
@@ -76,7 +76,7 @@ def generate_graphs(df):
 
     print("Saved: chart_regex_vs_hybrid.png")
 
-    # ------------------ Bar Chart: Additional Citations ------------------
+    #Bar Chart: Additional Citations 
     plt.figure(figsize=(12, 6))
     plt.bar(df["Document"], df["Additional"])
     plt.xlabel("Document")
@@ -89,7 +89,7 @@ def generate_graphs(df):
 
     print("Saved: chart_additional_citations.png")
 
-    # ------------------ Line Chart: Improvement Percentage ------------------
+    #Line Chart: Improvement Percentage
     plt.figure(figsize=(12,6))
     plt.plot(df["Document"], df["Improvement_%"], marker='o')
     plt.xlabel("Document")
@@ -104,9 +104,9 @@ def generate_graphs(df):
     print("Saved: chart_percentage_improvement.png")
 
 
-# ================================================================
+
 # 5. FULL CONSOLIDATED REPORT
-# ================================================================
+
 def generate_full_report(df):
     print("\n=========== FULL EVALUATION REPORT ===========\n")
 
@@ -126,9 +126,9 @@ def generate_full_report(df):
     print("✓ chart_percentage_improvement.png")
 
 
-# ================================================================
+
 # MAIN EXECUTION
-# ================================================================
+
 if __name__ == "__main__":
     export_tables(df)
     generate_graphs(df)
